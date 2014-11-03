@@ -14,36 +14,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
+#include "Dealer.h"
 
-#include <iostream>
-using namespace std;
-#include "Deck.h"
-
-Deck::Deck() {
-	Card* c;
-	string suit;
-
-	for(int i=0; i<52; i++){
-		if(i<13) suit = "Diamonds";
-		else if(i<26) suit = "Clubs";
-		else if(i<39) suit = "Hearts";
-		else suit = "Spades";
-		c = new Card((i%13) + 1, suit);
-		cards.push_front(*c);
-	}
-	deckIterator = cards.begin();
+Dealer::Dealer() {
 }
 
-const list<Card>& Deck::getCards() const {
-	return cards;
+Dealer::~Dealer() {
 }
 
-Deck::~Deck() {
-}
-
-Card* Deck::nextCard(){
-	Card c = *deckIterator;
-	Card* p_c = new Card(c.getOrder(),c.getSuit());
-	deckIterator++;
-	return p_c;
+void Dealer::process(){
+	return;
 }
