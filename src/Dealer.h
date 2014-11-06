@@ -28,6 +28,8 @@ public:
 	Dealer();
 	virtual ~Dealer();
 	void process();
+	string reportShowing();
+
 };
 
 #endif /* BJ_SRC_DEALER_H_ */

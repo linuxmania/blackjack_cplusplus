@@ -40,6 +40,7 @@ public:
 	Game();
 	virtual ~Game();
 	bool play();
+	Deck& getDeck();
 };
 
 #endif /* BJ_SRC_GAME_H_ */

@@ -27,7 +27,6 @@ using namespace std;
 
 class Participant {
 private:
-	list<Card> hand;
 	bool busted = false;
 
 public:
@@ -36,7 +35,8 @@ public:
 	const list<Card>& getHand() const;
 	void setHand(const list<Card>& hand);
 	void addCard(Card);
-	virtual void process() = 0;
+	list<Card> hand;
+//	virtual void process() = 0;
 	string getHandReport();
 	int getHandValue();
 };

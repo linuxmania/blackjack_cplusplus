@@ -14,9 +14,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-***************************/
+**************************/
 
 #include "Dealer.h"
+#include <sstream>
+
 
 Dealer::Dealer() {
 }
@@ -26,4 +28,13 @@ Dealer::~Dealer() {
 
 void Dealer::process(){
 	return;
+}
+
+string Dealer::reportShowing(){
+	stringstream sstm;
+	list<Card>::iterator iterator;
+	iterator = this->hand.begin();
+//	iterator = this->getHand().begin();
+	sstm << "Dealer shows " << iterator->getName() << " of " << iterator->getSuit();
+	return sstm.str();
 }

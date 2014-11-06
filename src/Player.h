@@ -21,6 +21,7 @@ limitations under the License.
 #define BJ_SRC_PLAYER_H_
 
 #include "Participant.h"
+#include "Deck.h"
 
 class Player: public Participant {
 private:
@@ -29,10 +30,13 @@ private:
 	bool lose = false;
 	bool tie = false;
 
+	bool takeHit();
+//	string getHandReport(string s);
+
 public:
 	Player();
 	virtual ~Player();
-	void process();
+	void process(Deck &deck, int num, string dealerShows);
 };
 
 #endif /* BJ_SRC_PLAYER_H_ */

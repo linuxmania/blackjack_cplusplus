@@ -29,10 +29,14 @@ Game::~Game() {
 
 void  Game::reportResults(){
 	list<Player>::iterator iterator;
+	cout << endl;
+	int i = 1;
+	string s;
 	for (iterator = players.begin(); iterator != players.end(); ++iterator) {
-		cout << iterator->getHandReport() << endl;
+		cout << "Player " << i  << ":\n" << iterator->getHandReport() << endl;
+		i++;
 	}
-	cout << dealer.getHandReport() << endl << endl;
+	cout << "Dealer:\n" << dealer.getHandReport() << endl << endl;
 
 /*
 	if(p.hasSplit){
@@ -66,6 +70,10 @@ int Game::getNumPlayers(){
 	return i;
 }
 
+Deck& Game::getDeck(){
+	return deck;
+}
+
 bool Game::play(){
 	int num = getNumPlayers();
 	if(num == 0)
@@ -79,9 +87,10 @@ bool Game::play(){
 
 	deal();
 
+	int j = 1;
 	list<Player>::iterator iterator;
 	for (iterator = players.begin(); iterator != players.end(); ++iterator) {
-		iterator->process();
+		iterator->process(getDeck(),j++, dealer.reportShowing());
 	}
 
 	dealer.process();
@@ -94,15 +103,12 @@ void Game::deal(){
 
 	list<Player>::iterator iterator;
 	Player player;
-	Card *c;
 
 	for(int i =0; i < 2; i++){
 		for (iterator = players.begin(); iterator != players.end(); ++iterator) {
-			c = deck.nextCard();
-			iterator->addCard(*c);
+			iterator->addCard(*deck.nextCard());
 		}
-		c = deck.nextCard();
-		dealer.addCard(*c);
+		dealer.addCard(*deck.nextCard());
 	}
 
 	/*
