@@ -78,7 +78,7 @@ bool Game::play(){
 	int num = getNumPlayers();
 	if(num == 0)
 		return false;
-//	deck.shuffle();
+	deck.shuffle();
 	Player* p;
 	for(int i=0; i < num; i++){
 		p = new Player();

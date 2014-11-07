@@ -62,4 +62,5 @@ void Deck::shuffle(){
 		deckIterator = cards.begin();
 	}
 	cards = shuffledDeck;
+	deckIterator = cards.begin();
 }
