@@ -26,13 +26,15 @@ using namespace std;
 class Deck {
 private:
 	list<Card> cards;
-	list<Card>::const_iterator deckIterator;
+	list<Card> shuffledDeck;
+	list<Card>::iterator deckIterator;
 
 public:
 	Deck();
 	virtual ~Deck();
 	const list<Card>& getCards() const;
 	Card* nextCard();
+	void shuffle();
 };
 
 #endif /* BJ_SRC_DECK_H_ */

@@ -17,6 +17,8 @@ limitations under the License.
 ****************************/
 
 #include <iostream>
+#include <stdlib.h>
+#include <iterator>
 using namespace std;
 #include "Deck.h"
 
@@ -47,4 +49,17 @@ Card* Deck::nextCard(){
 	Card* p_c = new Card(c.getOrder(),c.getSuit());
 	deckIterator++;
 	return p_c;
+}
+
+void Deck::shuffle(){
+	for(int i=0; i<52 ; i++){
+		int j = rand() % this->cards.size();
+		advance(deckIterator ,j);
+		Card c = *deckIterator;
+		Card* p_c = new Card(c.getOrder(),c.getSuit());
+		shuffledDeck.push_back(*p_c);
+		cards.erase(deckIterator);
+		deckIterator = cards.begin();
+	}
+	cards = shuffledDeck;
 }

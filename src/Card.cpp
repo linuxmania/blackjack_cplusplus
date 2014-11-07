@@ -17,6 +17,7 @@ limitations under the License.
 ****************************/
 
 #include "Card.h"
+#include <iostream>
 
 Card::Card(int order, string suit) {
 	this->order = order;
@@ -100,4 +101,5 @@ const string& Card::getSuit() const {
 }
 
 Card::~Card() {
+//	cout << "Card destructor\n";
 }

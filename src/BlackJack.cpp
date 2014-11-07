@@ -34,6 +34,15 @@ int main() {
 		cout << iterator->getName() << " of " << iterator->getSuit() << endl;
 	}
 
+	d->shuffle();
+	list<Card> list = d->getCards();
+	int i = list.size();
+	for (iterator = d->getCards().begin(); iterator != d->getCards().end(); ++iterator) {
+		Card c = *iterator;
+		cout << iterator->getName() << " of " << iterator->getSuit() << endl;
+	}
+
+
 	Game g;
 	g.play();
 	return 0;
