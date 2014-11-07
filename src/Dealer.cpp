@@ -18,6 +18,7 @@ limitations under the License.
 
 #include "Dealer.h"
 #include <sstream>
+#include <iostream>
 
 
 Dealer::Dealer() {
@@ -26,7 +27,25 @@ Dealer::Dealer() {
 Dealer::~Dealer() {
 }
 
-void Dealer::process(){
+bool Dealer::takeHit(){
+	if(getHandValue() < 17) return true;
+	return false;
+}
+
+void Dealer::process(Deck &deck){
+//	dealer.checkAces();
+	cout << endl << "Dealer has:\n" << getHandReport();
+	while(!busted){
+		if(takeHit()){
+			addCard(*deck.nextCard());
+			if(checkBusted())
+				cout << "Dealer has busted!!\n";
+//			cout << endl << "Dealer has:\n" << getHandReport();
+//			reportNewCard();
+//			if(checkBusted())
+//				reportResults();
+		} else break;
+	}
 	return;
 }
 

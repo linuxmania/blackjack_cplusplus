@@ -78,7 +78,20 @@ bool Game::play(){
 	int num = getNumPlayers();
 	if(num == 0)
 		return false;
+
+	list<Card>::const_iterator iterator1;
+	for (iterator1 = deck.getCards().begin(); iterator1 != deck.getCards().end(); ++iterator1) {
+		Card c = *iterator1;
+		cout << iterator1->getName() << " of " << iterator1->getSuit() << endl;
+	}
+
 	deck.shuffle();
+
+	for (iterator1 = deck.getCards().begin(); iterator1 != deck.getCards().end(); ++iterator1) {
+		Card c = *iterator1;
+		cout << iterator1->getName() << " of " << iterator1->getSuit() << endl;
+	}
+
 	Player* p;
 	for(int i=0; i < num; i++){
 		p = new Player();
@@ -93,7 +106,7 @@ bool Game::play(){
 		iterator->process(getDeck(),j++, dealer.reportShowing());
 	}
 
-	dealer.process();
+	dealer.process(getDeck());
 	reportResults();
 
 	return true;

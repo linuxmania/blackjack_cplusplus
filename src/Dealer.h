@@ -20,15 +20,17 @@ limitations under the License.
 #define BJ_SRC_DEALER_H_
 
 #include "Participant.h"
+#include "Deck.h"
 
 class Dealer: public Participant {
 private:
+	bool takeHit();
 
 public:
 	Dealer();
 	virtual ~Dealer();
-	void process();
 	string reportShowing();
+	void process(Deck &deck);
 
 };
 

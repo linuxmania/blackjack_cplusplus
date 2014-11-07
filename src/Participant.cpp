@@ -28,6 +28,22 @@ Participant::Participant() {
 Participant::~Participant() {
 }
 
+bool Participant::checkBusted(){
+	if(getHandValue() > 21){
+		busted = true;
+
+		list<Card>::iterator iterator;
+		for (iterator = hand.begin(); iterator != hand.end(); ++iterator) {
+			if(iterator->getOrder() == 1 && iterator->getValue() == 11){
+				iterator->setValue(1);
+				busted = false;
+				break;
+			}
+		}
+	}
+	return busted;
+}
+
 int Participant::getHandValue(){
 	int value = 0;
 	list<Card>::const_iterator iterator;

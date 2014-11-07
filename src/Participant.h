@@ -27,7 +27,10 @@ using namespace std;
 
 class Participant {
 private:
+
+protected:
 	bool busted = false;
+	bool checkBusted();
 
 public:
 	Participant();
