@@ -53,6 +53,7 @@ Card* Deck::nextCard(){
 
 void Deck::shuffle(){
 	for(int i=0; i<52 ; i++){
+		srand (time(NULL));
 		int j = rand() % this->cards.size();
 		advance(deckIterator ,j);
 		Card c = *deckIterator;
