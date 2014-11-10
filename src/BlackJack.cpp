@@ -25,7 +25,6 @@ using namespace std;
 int main() {
 	cout << "!!!Hello Wold!!!" << endl; // prints !!!Hello World!!!
 	Deck* d = new Deck();
-//	Deck d2 = *d;
 	cout << "!!!Hello Wold2!!!" << endl; // prints !!!Hello World!!!
 
 	list<Card>::const_iterator iterator;

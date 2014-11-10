@@ -29,7 +29,7 @@ class Participant {
 private:
 
 protected:
-	bool busted = false;
+	bool busted;
 	bool checkBusted();
 
 public:
@@ -39,9 +39,10 @@ public:
 	void setHand(const list<Card>& hand);
 	void addCard(Card);
 	list<Card> hand;
-//	virtual void process() = 0;
 	string getHandReport();
 	int getHandValue();
+	bool isBusted() const;
+	void setBusted(bool busted);
 };
 
 #endif /* BJ_SRC_PARTICIPANT_H_ */

@@ -34,26 +34,22 @@ bool Dealer::takeHit(){
 
 void Dealer::process(Deck &deck){
 //	dealer.checkAces();
-	cout << endl << "Dealer has:\n" << getHandReport();
 	while(!busted){
 		if(takeHit()){
 			addCard(*deck.nextCard());
 			if(checkBusted())
-				cout << "Dealer has busted!!\n";
-//			cout << endl << "Dealer has:\n" << getHandReport();
-//			reportNewCard();
-//			if(checkBusted())
-//				reportResults();
+				cout << "\nDealer has busted!!";
 		} else break;
 	}
+	cout << "\nDealer has:\n" << getHandReport();
 	return;
 }
 
 string Dealer::reportShowing(){
 	stringstream sstm;
 	list<Card>::iterator iterator;
-	iterator = this->hand.begin();
-//	iterator = this->getHand().begin();
-	sstm << "Dealer shows " << iterator->getName() << " of " << iterator->getSuit();
+	iterator = this->hand.end();
+	iterator--;
+	sstm << "Dealer shows: " << iterator->getName() << " of " << iterator->getSuit();
 	return sstm.str();
 }

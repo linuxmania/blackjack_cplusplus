@@ -23,6 +23,7 @@ limitations under the License.
 #include <sstream>
 
 Participant::Participant() {
+	busted = false;
 }
 
 Participant::~Participant() {
@@ -77,4 +78,12 @@ string Participant::getHandReport(){
 	}
 	sstm << "Value: " << value << "\n";
 	return sstm.str();
+}
+
+bool Participant::isBusted() const {
+	return busted;
+}
+
+void Participant::setBusted(bool busted) {
+	this->busted = busted;
 }

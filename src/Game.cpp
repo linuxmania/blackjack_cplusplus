@@ -20,6 +20,7 @@ limitations under the License.
 #include "Game.h"
 #include <string>
 #include <iostream>
+#include <sstream>
 
 Game::Game() {
 }
@@ -30,13 +31,20 @@ Game::~Game() {
 void  Game::reportResults(){
 	list<Player>::iterator iterator;
 	cout << endl;
-	int i = 1;
 	string s;
 	for (iterator = players.begin(); iterator != players.end(); ++iterator) {
-		cout << "Player " << i  << ":\n" << iterator->getHandReport() << endl;
-		i++;
+		if(!iterator->isBusted() && !iterator->isBlackjack()){
+			if(dealer.isBusted())
+				iterator->setWin(true);
+			else if(iterator->getHandValue() > dealer.getHandValue())
+				iterator->setWin(true);
+			else if(iterator->getHandValue() == dealer.getHandValue())
+				iterator->setTie(true);
+			else iterator->setLose(true);
+		}
+
+		iterator->reportResults(dealer.isBusted(),dealer.getHandValue());
 	}
-	cout << "Dealer:\n" << dealer.getHandReport() << endl << endl;
 
 /*
 	if(p.hasSplit){
@@ -60,8 +68,6 @@ void  Game::reportResults(){
 	System.out.println("");
 */
 }
-
-
 
 int Game::getNumPlayers(){
 	int i;
@@ -94,8 +100,10 @@ bool Game::play(){
 
 	Player* p;
 	for(int i=0; i < num; i++){
-		p = new Player();
-		players.push_front(*p);
+		stringstream sstm;
+		sstm << i+1;
+		p = new Player(sstm.str());
+		players.push_back(*p);
 	}
 
 	deal();
@@ -113,9 +121,7 @@ bool Game::play(){
 }
 
 void Game::deal(){
-
 	list<Player>::iterator iterator;
-	Player player;
 
 	for(int i =0; i < 2; i++){
 		for (iterator = players.begin(); iterator != players.end(); ++iterator) {
@@ -123,27 +129,5 @@ void Game::deal(){
 		}
 		dealer.addCard(*deck.nextCard());
 	}
-
-	/*
-	for (iterator = players->getCards().begin(); iterator != d->getCards().end(); ++iterator) {
-
-	for(Player p : players){
-		p.addCard(deck.nextCard());
-	}
-	dealer.addCard(deck.nextCard());
-	for(Player p : players){
-		p.addCard(deck.nextCard());
-		System.out.println("");
-		System.out.println("Player " + (players.indexOf(p) + 1));
-		p.checkBusted();
-		p.reportHand();
-		if(p.getHandValue() == 21) p.blackjack = true;
-		p.reportResults();
-	}
-	dealer.addCard(deck.nextCard());
-	System.out.println("");
-	dealer.reportInitialHand();
-*/
 	return;
 }
-

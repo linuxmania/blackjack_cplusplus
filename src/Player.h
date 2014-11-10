@@ -25,18 +25,29 @@ limitations under the License.
 
 class Player: public Participant {
 private:
-	bool blackjack = false;
-	bool win = false;
-	bool lose = false;
-	bool tie = false;
+	bool blackjack;
+	bool win;
+	bool lose;
+	bool tie;
 
 	bool takeHit();
-//	string getHandReport(string s);
+	string number;
 
 public:
-	Player();
+	Player(string number);
 	virtual ~Player();
 	void process(Deck &deck, int num, string dealerShows);
+	bool isBlackjack() const;
+	void setBlackjack(bool blackjack);
+	bool isLose() const;
+	void setLose(bool lose);
+	bool isTie() const;
+	void setTie(bool tie);
+	bool isWin() const;
+	void setWin(bool win);
+	void reportResults(bool dealerBusted, int dealerValue);
+	const string& getNumber() const;
+	void setNumber(const string& number);
 };
 
 #endif /* BJ_SRC_PLAYER_H_ */

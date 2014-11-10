@@ -21,7 +21,12 @@ limitations under the License.
 #include <iostream>
 #include <sstream>
 
-Player::Player() {
+Player::Player(string number) {
+	this->number = number;
+	blackjack = false;
+	win = false;
+	lose = false;
+	tie = false;
 }
 
 Player::~Player() {
@@ -36,68 +41,85 @@ bool Player::takeHit(){
 	return false;
 }
 
-/*
-string Player::getHandReport(string s){
-	int i = 1;
-	int value = 0;
-	stringstream sstm;
-	list<Card>::iterator iterator;
-	sstm << s << endl;
-	for (iterator = hand.begin(); iterator != hand.end(); ++iterator) {
-		Card c = *iterator;
-		sstm << "Card " << i++ << ": " << iterator->getName() << " of " << iterator->getSuit() << "\n";
-		value += iterator->getValue();
-	}
-	sstm << "Value: " << value << "\n";
-	return sstm.str();
+bool Player::isBlackjack() const {
+	return blackjack;
 }
-*/
+
+void Player::setBlackjack(bool blackjack) {
+	this->blackjack = blackjack;
+}
+
+bool Player::isLose() const {
+	return lose;
+}
+
+void Player::setLose(bool lose) {
+	this->lose = lose;
+}
+
+bool Player::isTie() const {
+	return tie;
+}
+
+void Player::setTie(bool tie) {
+	this->tie = tie;
+}
+
+bool Player::isWin() const {
+	return win;
+}
+
+void Player::setWin(bool win) {
+	this->win = win;
+}
+
+const string& Player::getNumber() const {
+	return number;
+}
+
+void Player::setNumber(const string& number) {
+	this->number = number;
+}
+
+void Player::reportResults(bool dealerBusted, int dealerValue){
+	cout << "Player " << number;
+	if(blackjack)
+		cout << " Blackjack! collect your dough." << endl;
+	else if(busted)
+		cout << " Sorry you're busted." << endl;
+	else if(win){
+		cout << " Winner " << getHandValue() << " - ";
+		if(dealerBusted)
+			cout << "Dealer is busted." << endl;
+		else cout << dealerValue << "." << endl;
+	} else if(tie)
+		cout << " Tie " << getHandValue() << " - " << dealerValue << "." << endl;
+	else cout << " Loser " << getHandValue() << " - " << dealerValue << "." << endl;
+}
 
 void Player::process(Deck &deck, int num, string dealerShows){
 //	checkAces();
 	if(getHandValue() == 21){
 		blackjack = true;
 		cout << getHandReport() << endl << "Blackjack!! Collect your dough." << endl;
-		//reportResults();
 //	} else if(this.canAndWantsSplit(num,dealerShow)){
 //		this.processSplit(deck,num,dealerShow);
 //		this.hasSplit = true;
 	} else {
 		while(getHandValue() < 21){
-			stringstream sstm;
-			sstm << "\nPlayer "
-					<< num
-					<< ":\n"
-					<< getHandReport()
-					<< dealerShows  << "\n";
-					// "\nClick 'OK' for hit, 'Cancel' to stay.";
-					//System.out.println(s);
-			cout << sstm.str();
+			cout << "\nPlayer "	<< num << ":\n" << getHandReport() << dealerShows  << "\n";
 			if(takeHit()){
 				this->addCard(*deck.nextCard());
+				if(checkBusted()){
+					cout << "\nPlayer " << num << ": Value: " << getHandValue() << endl;
+					cout << getHandReport();
+					cout << "Sorry you're busted." << endl;
+				} else if(getHandValue() == 21){
+					cout << "Player " << num << ": Value: " << getHandValue() << endl;
+					cout << getHandReport() << "21!" << endl;
+				}
 			}
 			else break;
-/*
-			if(checkBusted()){
-			s = "Player " + num + ": Value: " + getHandValue() + "\n"
-			+ getHandReport()
-			+ "Sorry you're busted.";
-			System.out.println(s);
-			break;
-			} else if(getHandValue() == 21){
-			s = "Player " + num + ": Value: " + this.getHandValue() + "\n"
-			+ getHandReport()
-			+ "21!";
-			System.out.println(s);
-			break;
-			}
-			}
-			else break;
-			}
-			}
-
-*/
-//			}
 		}
 	}
 	return;
