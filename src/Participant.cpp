@@ -29,6 +29,15 @@ Participant::Participant() {
 Participant::~Participant() {
 }
 
+void Participant::checkAces(){
+	list<Card>::iterator iterator;
+	iterator = this->hand.begin();
+	Card c = *iterator;
+	iterator++;
+	if(c.getOrder() == 1 && iterator->getOrder() ==1)
+		c.setValue(1);
+}
+
 bool Participant::checkBusted(){
 	if(getHandValue() > 21){
 		busted = true;

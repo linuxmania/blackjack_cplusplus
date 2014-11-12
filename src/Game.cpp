@@ -33,45 +33,30 @@ void  Game::reportResults(){
 	cout << endl;
 	string s;
 	for (iterator = players.begin(); iterator != players.end(); ++iterator) {
-		if(!iterator->isBusted() && !iterator->isBlackjack()){
-			if(dealer.isBusted())
-				iterator->setWin(true);
-			else if(iterator->getHandValue() > dealer.getHandValue())
-				iterator->setWin(true);
-			else if(iterator->getHandValue() == dealer.getHandValue())
-				iterator->setTie(true);
-			else iterator->setLose(true);
-		}
 
-		iterator->reportResults(dealer.isBusted(),dealer.getHandValue());
-	}
-
-/*
-	if(p.hasSplit){
-			p.reportSplitResults(dealer.getHandValue() ,
-					String.valueOf(players.indexOf(p) + 1));
+		if(iterator->isHasSplit()){
+				iterator->reportSplitResults(dealer.isBusted(), dealer.getHandValue() , iterator->getNumber());
 		} else {
-			if(!p.busted && !p.blackjack){
-				if(dealer.busted)
-					p.win = true;
-				else if(p.getHandValue() > dealer.getHandValue())
-					p.win = true;
-				else if(p.getHandValue() == dealer.getHandValue())
-					p.tie = true;
-				else p.lose = true;
+
+
+			if(!iterator->isBusted() && !iterator->isBlackjack()){
+				if(dealer.isBusted())
+					iterator->setWin(true);
+				else if(iterator->getHandValue() > dealer.getHandValue())
+					iterator->setWin(true);
+				else if(iterator->getHandValue() == dealer.getHandValue())
+					iterator->setTie(true);
+				else iterator->setLose(true);
 			}
-			System.out.println("");
-			System.out.println("Player " + (players.indexOf(p) + 1));
-			p.reportResults();
+
+			iterator->reportResults(dealer.isBusted(), dealer.getHandValue());
 		}
 	}
-	System.out.println("");
-*/
 }
 
 int Game::getNumPlayers(){
 	int i;
-	cout << "Number of Players(1 - 5): ";
+	cout << "\nNumber of Players(1 - 5): ";
 	cin >> i;
 	return i;
 }
@@ -84,20 +69,20 @@ bool Game::play(){
 	int num = getNumPlayers();
 	if(num == 0)
 		return false;
-
+/*
 	list<Card>::const_iterator iterator1;
 	for (iterator1 = deck.getCards().begin(); iterator1 != deck.getCards().end(); ++iterator1) {
 		Card c = *iterator1;
 		cout << iterator1->getName() << " of " << iterator1->getSuit() << endl;
 	}
-
+*/
 	deck.shuffle();
-
+/*
 	for (iterator1 = deck.getCards().begin(); iterator1 != deck.getCards().end(); ++iterator1) {
 		Card c = *iterator1;
 		cout << iterator1->getName() << " of " << iterator1->getSuit() << endl;
 	}
-
+*/
 	Player* p;
 	for(int i=0; i < num; i++){
 		stringstream sstm;
@@ -108,10 +93,9 @@ bool Game::play(){
 
 	deal();
 
-	int j = 1;
 	list<Player>::iterator iterator;
 	for (iterator = players.begin(); iterator != players.end(); ++iterator) {
-		iterator->process(getDeck(),j++, dealer.reportShowing());
+		iterator->process(getDeck(),iterator->getNumber(), dealer.reportShowing());
 	}
 
 	dealer.process(getDeck());

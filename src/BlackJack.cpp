@@ -23,6 +23,7 @@ using namespace std;
 #include "Game.h"
 
 int main() {
+/*
 	cout << "!!!Hello Wold!!!" << endl; // prints !!!Hello World!!!
 	Deck* d = new Deck();
 	cout << "!!!Hello Wold2!!!" << endl; // prints !!!Hello World!!!
@@ -41,8 +42,11 @@ int main() {
 		cout << iterator->getName() << " of " << iterator->getSuit() << endl;
 	}
 
+*/
+	while(1){
+		Game g;
+		if(!g.play()) break;
+	}
 
-	Game g;
-	g.play();
 	return 0;
 }

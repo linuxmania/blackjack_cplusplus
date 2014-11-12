@@ -31,6 +31,7 @@ private:
 protected:
 	bool busted;
 	bool checkBusted();
+	void checkAces();
 
 public:
 	Participant();

@@ -33,7 +33,7 @@ bool Dealer::takeHit(){
 }
 
 void Dealer::process(Deck &deck){
-//	dealer.checkAces();
+	checkAces();
 	while(!busted){
 		if(takeHit()){
 			addCard(*deck.nextCard());

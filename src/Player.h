@@ -29,14 +29,18 @@ private:
 	bool win;
 	bool lose;
 	bool tie;
+	bool hasSplit;
 
 	bool takeHit();
 	string number;
+	bool canAndWantsSplit(string num, string dealerShows);
+	void processSplit(Deck& deck,string num,string dealerShows);
+	list<Player> splitPlayers;
 
 public:
 	Player(string number);
 	virtual ~Player();
-	void process(Deck &deck, int num, string dealerShows);
+	void process(Deck &deck, string num, string dealerShows);
 	bool isBlackjack() const;
 	void setBlackjack(bool blackjack);
 	bool isLose() const;
@@ -48,6 +52,9 @@ public:
 	void reportResults(bool dealerBusted, int dealerValue);
 	const string& getNumber() const;
 	void setNumber(const string& number);
+	void reportSplitResults(bool dealerBusted, int dealerValue, string num);
+	bool isHasSplit() const;
+	void setHasSplit(bool hasSplit);
 };
 
 #endif /* BJ_SRC_PLAYER_H_ */
